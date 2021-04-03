@@ -43,12 +43,12 @@
                   <Insets left="200.0" top="100.0" />
                </VBox.margin>
             </ComboBox>
-            <Button fx:id="add" mnemonicParsing="false" text="&gt;&gt;">
+            <Button fx:id="add" mnemonicParsing="false" onAction="#addToListView" text="&gt;&gt;">
                <VBox.margin>
                   <Insets left="250.0" top="25.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="remove" mnemonicParsing="false" text="&lt;&lt;">
+            <Button fx:id="remove" mnemonicParsing="false" onAction="#removeFromListView" text="&lt;&lt;">
                <VBox.margin>
                   <Insets left="250.0" top="20.0" />
                </VBox.margin>
@@ -57,12 +57,12 @@
       </VBox>
    </center>
    <right>
-      <VBox prefHeight="387.0" prefWidth="153.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="307.0" prefWidth="196.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
          <children>
-            <ListView fx:id="order" prefHeight="213.0" prefWidth="128.0">
+            <ListView fx:id="order" prefHeight="214.0" prefWidth="156.0">
                <VBox.margin>
                   <Insets right="25.0" top="85.0" />
                </VBox.margin>
@@ -83,7 +83,7 @@
                   <Insets left="10.0" top="50.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="addOrderButton" mnemonicParsing="false" text="Add to Order">
+            <Button fx:id="addOrderButton" mnemonicParsing="false" onAction="#addToOrder" text="Add to Order">
                <HBox.margin>
                   <Insets left="20.0" top="50.0" />
                </HBox.margin>

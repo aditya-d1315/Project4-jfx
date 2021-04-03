@@ -2,12 +2,10 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert.AlertType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,7 +28,7 @@ public class DonutController {
     private Button remove;
 
     @FXML
-    private ListView<?> order;
+    private ListView<String> order;
 
     @FXML
     private TextField totalTextField;
@@ -38,18 +36,20 @@ public class DonutController {
     @FXML
     private Button addOrderButton;
 
-    private double basePrice, numDonuts;
+    private double subTotal, basePrice, numDonuts;
 
     @FXML
     public void initialize() {
 
+        totalTextField.setEditable(false);
+
         // Type of Donut
 
-        typesCB.getItems().add( "Yeast" );
+        typesCB.getItems().add( "Yeast Donut" );
         typesCB.getItems().add( "Cake Donut" );
-        typesCB.getItems().add( "Donut Holes" );
+        typesCB.getItems().add( "Donut Hole" );
 
-        typesCB.getSelectionModel().select("Yeast");
+        typesCB.getSelectionModel().select("Yeast Donut");
 
         flavorLV.getItems().add( "Glazed" );
         flavorLV.getItems().add( "Choclate Frosted" );
@@ -65,14 +65,17 @@ public class DonutController {
 
         quantity.getSelectionModel().select("1" );
 
+        subTotal = 0;
+
         basePrice = 1.39;
 
         numDonuts = 1;
 
-        totalTextField.setText( String.format( Double.toString( basePrice * numDonuts ), "%.2f" ) );
+        totalTextField.setText( String.format("%.2f", 0.00) );
 
 
         // ListView
+        order.getItems().clear();
 
     }
 
@@ -80,7 +83,7 @@ public class DonutController {
     void update(ActionEvent event) {
 
 
-        if ( typesCB.getValue().equals( "Yeast" ) ) {
+        if ( typesCB.getValue().equals( "Yeast Donut" ) ) {
 
             flavorLV.getItems().clear();
 
@@ -104,7 +107,7 @@ public class DonutController {
             basePrice = 1.59;
 
         }
-        else if ( typesCB.getValue().equals( "Donut Holes" ) ) {
+        else if ( typesCB.getValue().equals( "Donut Hole" ) ) {
 
             flavorLV.getItems().clear();
 
@@ -117,25 +120,67 @@ public class DonutController {
             basePrice = 0.33;
 
         }
-
-        totalTextField.setText( String.format( Double.toString( basePrice * numDonuts ), "%.2f" ) );
-
-
-
-
-
-
     }
 
     @FXML
     void updateCost(ActionEvent event) {
-
         numDonuts = Double.parseDouble( quantity.getValue() );
-
-        totalTextField.setText( String.format( Double.toString( basePrice * numDonuts ), "%.2f" ) );
-
     }
 
+    @FXML
+    void addToListView(ActionEvent event) {
+        if(flavorLV.getSelectionModel().getSelectedItem() == null) {
+            Alert a = new Alert(AlertType.ERROR);
+            a.setContentText("Flavor not selected.");
+            a.show();
+        }
+        else {
+            String donutType = typesCB.getValue();
+            String flavor = flavorLV.getSelectionModel().getSelectedItem();
+            double numDonuts = Double.parseDouble(quantity.getValue());
+
+            //<numDonuts>,<donutType>,<flavor>
+            String item = numDonuts + "," + donutType + "," + flavor;
+            order.getItems().add(item);
+            subTotal += basePrice * numDonuts;
+            totalTextField.setText( String.format("%.2f", subTotal ));
+        }
+    }
+
+    @FXML
+    void removeFromListView(ActionEvent event) {
+        String item = order.getSelectionModel().getSelectedItem();
+        if(item == null) {
+            Alert a = new Alert(AlertType.ERROR);
+            a.setContentText("No Donut item selected.");
+            a.show();
+        }
+        else {
+            //<numDonuts>,<donutType>,<flavor>
+            String[] itemArr = item.split(",");
+            double numDonuts = Double.parseDouble(itemArr[0]);
+            String donutType = itemArr[1];
+
+            switch(donutType) {
+                case "Yeast Donut" -> subTotal -= (1.39 * numDonuts);
+                case "Cake Donut" -> subTotal -= (1.59 * numDonuts);
+                case "Donut Hole" -> subTotal -= (0.33 * numDonuts);
+                default -> {
+                    Alert a = new Alert(AlertType.ERROR);
+                    a.setContentText("Something went wrong.");
+                    a.show();
+                }
+            }
+
+            order.getItems().remove(item);
+            totalTextField.setText(String.format("%.2f", subTotal));
+        }
+    }
+
+    @FXML
+    void addToOrder(ActionEvent event) {
+
+    }
 
 }
 

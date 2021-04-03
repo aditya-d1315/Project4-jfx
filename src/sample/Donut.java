@@ -15,8 +15,14 @@ public class Donut extends MenuItem {
     private int type;
 
     /**
+     * Instance variable for the flavor of the donut.
+     */
+    private String flavor;
+
+    /**
      *  Specific price for the donut depending on the type
      */
+
 
     private double price;
 
@@ -35,8 +41,9 @@ public class Donut extends MenuItem {
      * Constructor for a new Donut object.
      * @param type the type of the donut order.
      */
-    public Donut(int type) {
+    public Donut(int type, String flavor) {
         this.type = type;
+        this.flavor = flavor;
     }
 
     /**
@@ -73,5 +80,13 @@ public class Donut extends MenuItem {
      */
     public int getType() {
         return type;
+    }
+
+    /**
+     * Getter method to obtain the flavor of the donut.
+     * @return the flavor of the donut.
+     */
+    public String getFlavor() {
+        return flavor;
     }
 }
