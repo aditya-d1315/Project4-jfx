@@ -25,7 +25,7 @@ public class Order implements Customizable {
 
         this.number = number;
 
-        this.list = new ArrayList<>();
+        this.list = new ArrayList<MenuItem>();
 
     }
 

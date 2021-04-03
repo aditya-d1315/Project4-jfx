@@ -14,9 +14,7 @@ public class MenuItem {
     /**
      * Default constructor to create a new MenuItem.
      */
-    public MenuItem() {
-
-    }
+    public MenuItem() {}
 
     /**
      * Method to calculate the price of this MenuItem. This method will be empty in the superclass, and overridden in the subclasses.

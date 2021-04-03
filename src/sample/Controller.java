@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOError;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -27,6 +28,22 @@ public class Controller {
 
     @FXML
     private ImageView store_order_img_button;
+
+    private Order currentOrder;
+
+    private int orderNum;
+
+    @FXML
+    public void initialize() {
+        orderNum = 1;
+        currentOrder = new Order(orderNum);
+    }
+
+    public void addDonutsToOrder(ArrayList<MenuItem> donutsList) {
+        for(int i = 0; i < donutsList.size(); i ++) {
+
+        }
+    }
 
     @FXML
     void selectCoffee(MouseEvent event) {
@@ -48,6 +65,9 @@ public class Controller {
             stage.setTitle( "Order Donuts" );
 
             stage.show();
+
+            DonutController donutController = fxmlLoader.getController();
+            donutController.setMainController(this);
 
         } catch ( IOException e ) {
 

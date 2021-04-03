@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert.AlertType;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DonutController {
@@ -36,7 +37,38 @@ public class DonutController {
     @FXML
     private Button addOrderButton;
 
+    private Controller mainController;
+
     private double subTotal, basePrice, numDonuts;
+
+    /**
+     * Constants for donut type.
+     */
+    public static final int TYPE_YEAST = 0, TYPE_CAKE = 1, TYPE_HOLE = 2;
+
+    /**
+     * Initialization constant
+     */
+    public static final int INIT = 1;
+
+    /**
+     * Constants for indexing arrays.
+     */
+    public static final int QUANTITY_INDEX = 0, TYPE_INDEX = 1, FLAVOR_INDEX = 2;
+
+    /**
+     * Constant for max quantity of donuts to add at a given time
+     */
+    public static final int MAX_DONUTS = 12;
+
+    /**
+     * Constants for base prices of donuts.
+     */
+    public static final double YEAST_PRICE = 1.39, CAKE_PRICE = 1.59, HOLE_PRICE = 0.33;
+
+    public void setMainController(Controller controller) {
+        this.mainController = controller;
+    }
 
     @FXML
     public void initialize() {
@@ -57,7 +89,7 @@ public class DonutController {
 
         // Quantity Button
 
-        for ( int i = 1; i <= 12; i++ ) {
+        for ( int i = 1; i <= MAX_DONUTS; i++ ) {
 
             quantity.getItems().add( Integer.toString( i ) );
 
@@ -67,9 +99,9 @@ public class DonutController {
 
         subTotal = 0;
 
-        basePrice = 1.39;
+        basePrice = YEAST_PRICE;
 
-        numDonuts = 1;
+        numDonuts = INIT;
 
         totalTextField.setText( String.format("%.2f", 0.00) );
 
@@ -91,7 +123,7 @@ public class DonutController {
             flavorLV.getItems().add( "Choclate Frosted" );
             flavorLV.getItems().add( "Strawberry Frosted" );
 
-            basePrice = 1.39;
+            basePrice = YEAST_PRICE;
 
         }
         else if ( typesCB.getValue().equals( "Cake Donut" ) ) {
@@ -104,7 +136,7 @@ public class DonutController {
 
             flavorLV.getItems().add( "Choclate Kreme" );
 
-            basePrice = 1.59;
+            basePrice = CAKE_PRICE;
 
         }
         else if ( typesCB.getValue().equals( "Donut Hole" ) ) {
@@ -117,7 +149,7 @@ public class DonutController {
 
             flavorLV.getItems().add( "Vanilla Frosted" );
 
-            basePrice = 0.33;
+            basePrice = HOLE_PRICE;
 
         }
     }
@@ -137,7 +169,6 @@ public class DonutController {
         else {
             String donutType = typesCB.getValue();
             String flavor = flavorLV.getSelectionModel().getSelectedItem();
-            double numDonuts = Double.parseDouble(quantity.getValue());
 
             //<numDonuts>,<donutType>,<flavor>
             String item = numDonuts + "," + donutType + "," + flavor;
@@ -158,16 +189,16 @@ public class DonutController {
         else {
             //<numDonuts>,<donutType>,<flavor>
             String[] itemArr = item.split(",");
-            double numDonuts = Double.parseDouble(itemArr[0]);
-            String donutType = itemArr[1];
+            double numDonuts = Double.parseDouble(itemArr[QUANTITY_INDEX]);
+            String donutType = itemArr[TYPE_INDEX];
 
             switch(donutType) {
-                case "Yeast Donut" -> subTotal -= (1.39 * numDonuts);
-                case "Cake Donut" -> subTotal -= (1.59 * numDonuts);
-                case "Donut Hole" -> subTotal -= (0.33 * numDonuts);
+                case "Yeast Donut" -> subTotal -= (YEAST_PRICE * numDonuts);
+                case "Cake Donut" -> subTotal -= (CAKE_PRICE * numDonuts);
+                case "Donut Hole" -> subTotal -= (HOLE_PRICE * numDonuts);
                 default -> {
                     Alert a = new Alert(AlertType.ERROR);
-                    a.setContentText("Something went wrong.");
+                    a.setContentText("Something went wrong (Subtracting from subTotal).");
                     a.show();
                 }
             }
@@ -179,7 +210,29 @@ public class DonutController {
 
     @FXML
     void addToOrder(ActionEvent event) {
+        ArrayList<MenuItem> donutsList = new ArrayList<MenuItem>();
+        for(int i = 0; i < order.getItems().size(); i ++) {
+            String[] itemArr = order.getItems().get(i).split(",");
+            int numDonuts = (int)(Double.parseDouble(itemArr[QUANTITY_INDEX]));
+            int donutType = 0;
+            switch(itemArr[TYPE_INDEX]) {
+                case "Yeast Donut" -> donutType = TYPE_YEAST;
+                case "Cake Donut" -> donutType = TYPE_CAKE;
+                case "Donut Hole" -> donutType = TYPE_HOLE;
+                default -> {
+                    Alert a = new Alert(AlertType.ERROR);
+                    a.setContentText("Something went wrong (Assigning donut type when adding to order).");
+                    a.show();
+                }
+            }
+            String donutFlavor = itemArr[FLAVOR_INDEX];
 
+            for(int j = 0; j < numDonuts; j ++) {
+                donutsList.add(new Donut(donutType, donutFlavor));
+            }
+        }
+
+        mainController.addDonutsToOrder(donutsList);
     }
 
 }
