@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CoffeeController">
+   <top>
+      <Label text="Ordering Coffee" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Arial Bold Italic" size="36.0" />
+         </font>
+      </Label>
+   </top>
+   <left>
+      <VBox alignment="CENTER" prefHeight="354.0" prefWidth="156.0" BorderPane.alignment="CENTER">
+         <children>
+            <CheckBox fx:id="creamBox" mnemonicParsing="false" onAction="#cbAction" text="Cream">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </CheckBox>
+            <CheckBox fx:id="milkBox" mnemonicParsing="false" onAction="#mbAction" text="Milk">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </CheckBox>
+            <CheckBox fx:id="whipcreamBox" mnemonicParsing="false" onAction="#wcbAction" text="Whipped Cream">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </CheckBox>
+            <CheckBox fx:id="syrupBox" mnemonicParsing="false" onAction="#sbAction" text="Syrup">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </CheckBox>
+            <CheckBox fx:id="caramelBox" mnemonicParsing="false" onAction="#cbAction" text="Caramel">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </CheckBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="CENTER" prefHeight="354.0" prefWidth="202.0" BorderPane.alignment="CENTER">
+         <children>
+            <ComboBox fx:id="sizeCB" onAction="#updateSize" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="quantityCB" onAction="#updateQuantity" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </ComboBox>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <VBox alignment="CENTER" prefHeight="354.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label text="Total" />
+                  <TextField fx:id="subTotalField" prefHeight="27.0" prefWidth="140.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Button fx:id="orderButton" mnemonicParsing="false" onAction="#addToOrder" text="Add to Order">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
