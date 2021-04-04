@@ -49,13 +49,32 @@ public class Controller {
 
         currentOrder.orderPrice();
 
-        System.out.println( "Total Price: " + currentOrder.getTotalPrice() );
-
     }
 
     @FXML
     void selectCoffee(MouseEvent event) {
         //System.out.println("Coffee");
+
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Coffee.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+
+            stage.setTitle( "Order Coffee" );
+
+            stage.show();
+
+            CoffeeController coffeeController = fxmlLoader.getController();
+            coffeeController.setMainController(this);
+
+        } catch ( IOException e ) {
+
+        }
+
+
     }
 
     @FXML

@@ -89,7 +89,7 @@ public class DonutController {
 
         // Quantity Button
 
-        for ( int i = 1; i <= MAX_DONUTS; i++ ) {
+        for ( int i = INIT; i <= MAX_DONUTS; i++ ) {
 
             quantity.getItems().add( Integer.toString( i ) );
 
@@ -232,7 +232,6 @@ public class DonutController {
 
                 Donut donut = new Donut( donutType, donutFlavor );
                 donut.itemPrice();
-                System.out.println(donut.getPrice());
 
                 donutsList.add( donut );
 
