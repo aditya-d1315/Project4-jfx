@@ -45,8 +45,6 @@ public class Controller {
 
             currentOrder.getList().add( donutsList.get( i ) );
 
-            System.out.println( donutsList.get( i ) );
-
         }
 
         currentOrder.orderPrice();

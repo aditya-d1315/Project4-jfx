@@ -22,6 +22,14 @@ public class MenuItem {
     public void itemPrice() {}
 
     /**
+     * Setter method to set the price of the MenuItem
+     * @param price the price to set
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    /**
      * Getter method to obtain the price of the MenuItem.
      * @return the price.
      */

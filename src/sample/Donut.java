@@ -20,13 +20,6 @@ public class Donut extends MenuItem {
     private String flavor;
 
     /**
-     *  Specific price for the donut depending on the type
-     */
-
-
-    private double price;
-
-    /**
      * Constants relating to type of donut.
      */
     public static final int TYPE_YEAST = 0, TYPE_CAKE = 1, TYPE_HOLE = 2;
@@ -52,27 +45,12 @@ public class Donut extends MenuItem {
      */
     @Override
     public void itemPrice() {
-
-        switch ( type )
-        {
-            case 0:
-                price = YEAST_PRICE;
-                break;
-
-            case 1:
-                price = CAKE_PRICE;
-                break;
-
-            case 2:
-                price = HOLE_PRICE;
-                break;
-
-            default:
-                price = 0;
-
+        switch (type) {
+            case TYPE_YEAST -> super.setPrice(YEAST_PRICE);
+            case TYPE_CAKE -> super.setPrice(CAKE_PRICE);
+            case TYPE_HOLE -> super.setPrice(HOLE_PRICE);
+            default -> super.setPrice(0);
         }
-
-
     }
 
     /**

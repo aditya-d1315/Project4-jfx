@@ -231,8 +231,8 @@ public class DonutController {
                 //donutsList.add(new Donut(donutType, donutFlavor));
 
                 Donut donut = new Donut( donutType, donutFlavor );
-
                 donut.itemPrice();
+                System.out.println(donut.getPrice());
 
                 donutsList.add( donut );
 
