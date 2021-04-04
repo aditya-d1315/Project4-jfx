@@ -38,6 +38,8 @@ public class CoffeeController {
 
     private Controller mainController;
 
+    private Coffee coffee;
+
     private double subTotal;
 
     private int numCoffee;
@@ -74,48 +76,131 @@ public class CoffeeController {
 
         quantityCB.getSelectionModel().select( "1" );
 
-        subTotal = 0;
-
         numCoffee = ONE;
 
-        subTotalField.setText( String.format( "%.2f", 0 ) );
+        subTotal = Coffee.SHORT_PRICE * numCoffee;
+
+        subTotalField.setText( String.format( "%.2f", subTotal ) );
+
+        coffee = new Coffee(Coffee.SIZE_SHORT);
 
     }
 
     @FXML
     void addToOrder(ActionEvent event) {
 
+    }
 
+    @FXML
+    void caAction(ActionEvent event) {
+        //caramel
+        if(!coffee.getAddIns()[Coffee.CARAMEL]) {
+            //if false, add add-in
+            coffee.add("caramel");
+            subTotal += Coffee.ADDIN_PRICE;
+        }
+        else {
+            //if true, remove add-in
+            coffee.remove("caramel");
+            subTotal -= Coffee.ADDIN_PRICE;
+        }
 
+        subTotalField.setText(String.format("%.2f", subTotal));
     }
 
     @FXML
     void cbAction(ActionEvent event) {
+        //cream
+        if(!coffee.getAddIns()[Coffee.CREAM]) {
+            //if false, add add-in
+            coffee.add("cream");
+            subTotal += Coffee.ADDIN_PRICE;
+        }
+        else {
+            //if true, remove add-in
+            coffee.remove("cream");
+            subTotal -= Coffee.ADDIN_PRICE;
+        }
 
+        subTotalField.setText(String.format("%.2f", subTotal));
     }
 
     @FXML
     void mbAction(ActionEvent event) {
+        //milk
+        if(!coffee.getAddIns()[Coffee.MILK]) {
+            //if false, add add-in
+            coffee.add("milk");
+            subTotal += Coffee.ADDIN_PRICE;
+        }
+        else {
+            //if true, remove add-in
+            coffee.remove("milk");
+            subTotal -= Coffee.ADDIN_PRICE;
+        }
 
+        subTotalField.setText(String.format("%.2f", subTotal));
     }
 
     @FXML
     void sbAction(ActionEvent event) {
+        //syrup
+        if(!coffee.getAddIns()[Coffee.SYRUP]) {
+            //if false, add add-in
+            coffee.add("syrup");
+            subTotal += Coffee.ADDIN_PRICE;
+        }
+        else {
+            //if true, remove add-in
+            coffee.remove("syrup");
+            subTotal -= Coffee.ADDIN_PRICE;
+        }
 
-    }
-
-    @FXML
-    void updateQuantity(ActionEvent event) {
-
-    }
-
-    @FXML
-    void updateSize(ActionEvent event) {
-
+        subTotalField.setText(String.format("%.2f", subTotal));
     }
 
     @FXML
     void wcbAction(ActionEvent event) {
+        //whipped cream
+        if(!coffee.getAddIns()[Coffee.WHIPPED_CREAM]) {
+            //if false, add add-in
+            coffee.add("whipped cream");
+            subTotal += Coffee.ADDIN_PRICE;
+        }
+        else {
+            //if true, remove add-in
+            coffee.remove("whipped cream");
+            subTotal -= Coffee.ADDIN_PRICE;
+        }
+
+        subTotalField.setText(String.format("%.2f", subTotal));
+    }
+
+    @FXML
+    void updateQuantity(ActionEvent event) {
+        numCoffee = Integer.parseInt(quantityCB.getValue());
+
+        double addInCost = 0;
+        for(int i = 0; i < Coffee.NUM_ADD_INS; i ++) {
+            if(coffee.getAddIns()[i]) {
+                addInCost += Coffee.ADDIN_PRICE;
+            }
+        }
+
+        double sizeCost = 0;
+        switch(sizeCB.getValue()) {
+            case "Short" -> sizeCost = Coffee.SHORT_PRICE;
+            case "Tall" -> sizeCost = Coffee.TALL_PRICE;
+            case "Grande" -> sizeCost = Coffee.GRANDE_PRICE;
+            case "Venti" -> sizeCost = Coffee.VENTI_PRICE;
+        }
+
+        subTotal = numCoffee * (sizeCost + addInCost);
+        subTotalField.setText(String.format("%.2f", subTotal));
+    }
+
+    @FXML
+    void updateSize(ActionEvent event) {
 
     }
 

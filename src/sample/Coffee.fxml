@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CoffeeController">
    <top>
       <Label text="Ordering Coffee" BorderPane.alignment="CENTER">
@@ -43,7 +42,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </CheckBox>
-            <CheckBox fx:id="caramelBox" mnemonicParsing="false" onAction="#cbAction" text="Caramel">
+            <CheckBox fx:id="caramelBox" mnemonicParsing="false" onAction="#caAction" text="Caramel">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
@@ -54,16 +53,26 @@
    <center>
       <VBox alignment="CENTER" prefHeight="354.0" prefWidth="202.0" BorderPane.alignment="CENTER">
          <children>
-            <ComboBox fx:id="sizeCB" onAction="#updateSize" prefWidth="150.0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </ComboBox>
-            <ComboBox fx:id="quantityCB" onAction="#updateQuantity" prefWidth="150.0">
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-            </ComboBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Size:" />
+                  <ComboBox fx:id="sizeCB" onAction="#updateSize" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Quantity:" />
+                  <ComboBox fx:id="quantityCB" onAction="#updateQuantity" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </center>
@@ -75,7 +84,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label text="Total" />
+                  <Label text="Total:" />
                   <TextField fx:id="subTotalField" prefHeight="27.0" prefWidth="140.0">
                      <HBox.margin>
                         <Insets left="10.0" />

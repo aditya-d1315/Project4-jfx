@@ -35,7 +35,7 @@ public class Coffee extends MenuItem implements Customizable {
      * Constants relating to the price for each specific size of coffee
      */
 
-    public static final double SHORT_PRICE = 1.99, TALL_PRICE = 2.49, GRANDE_PRICE = 2.99, VENTI_PRICE = 3.49;
+    public static final double SHORT_PRICE = 1.99, TALL_PRICE = 2.49, GRANDE_PRICE = 2.99, VENTI_PRICE = 3.49, ADDIN_PRICE = 0.20;
 
     /**
      * Constructor for a new Coffee object.
@@ -45,6 +45,9 @@ public class Coffee extends MenuItem implements Customizable {
     public Coffee(int size) {
         this.size = size;
         this.addIns = new boolean[ NUM_ADD_INS ];
+        for(int i = 0; i < NUM_ADD_INS; i ++) {
+            addIns[i] = false;
+        }
     }
 
     /**
@@ -58,7 +61,7 @@ public class Coffee extends MenuItem implements Customizable {
         for ( int i = 0; i < NUM_ADD_INS; i++ ) {
 
             if ( addIns[ i ] )
-                super.setPrice( super.getPrice() + 0.2 );
+                super.setPrice( super.getPrice() + ADDIN_PRICE );
 
         }
 
