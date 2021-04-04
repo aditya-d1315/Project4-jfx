@@ -13,19 +13,27 @@ public class Order implements Customizable {
      * Unique order number
      */
 
-    int number;
+    private int number;
+
+    /**
+     * Total price for the order
+     */
+
+    private double totalPrice;
 
     /**
      * List of MenuItems
      */
 
-    ArrayList< MenuItem > list;
+    private ArrayList< MenuItem > list;
 
     public Order( int number ) {
 
         this.number = number;
 
         this.list = new ArrayList<MenuItem>();
+
+        this.totalPrice = 0;
 
     }
 
@@ -51,5 +59,24 @@ public class Order implements Customizable {
         else
             return false;
 
+    }
+
+    public ArrayList< MenuItem > getList() {
+        return list;
+    }
+
+    public void orderPrice() {
+
+
+        for ( int i = 0; i < list.size(); i++ ) {
+
+            this.totalPrice += list.get( i ).getPrice();
+
+        }
+
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
     }
 }

@@ -228,7 +228,14 @@ public class DonutController {
             String donutFlavor = itemArr[FLAVOR_INDEX];
 
             for(int j = 0; j < numDonuts; j ++) {
-                donutsList.add(new Donut(donutType, donutFlavor));
+                //donutsList.add(new Donut(donutType, donutFlavor));
+
+                Donut donut = new Donut( donutType, donutFlavor );
+
+                donut.itemPrice();
+
+                donutsList.add( donut );
+
             }
         }
 

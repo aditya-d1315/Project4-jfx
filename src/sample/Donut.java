@@ -37,6 +37,7 @@ public class Donut extends MenuItem {
 
     public static final double YEAST_PRICE = 1.39, CAKE_PRICE = 1.59, HOLE_PRICE = 0.33;
 
+
     /**
      * Constructor for a new Donut object.
      * @param type the type of the donut order.

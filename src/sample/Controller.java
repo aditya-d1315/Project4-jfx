@@ -40,9 +40,19 @@ public class Controller {
     }
 
     public void addDonutsToOrder(ArrayList<MenuItem> donutsList) {
+
         for(int i = 0; i < donutsList.size(); i ++) {
 
+            currentOrder.getList().add( donutsList.get( i ) );
+
+            System.out.println( donutsList.get( i ) );
+
         }
+
+        currentOrder.orderPrice();
+
+        System.out.println( "Total Price: " + currentOrder.getTotalPrice() );
+
     }
 
     @FXML
