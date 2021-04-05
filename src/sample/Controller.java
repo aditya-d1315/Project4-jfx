@@ -55,7 +55,7 @@ public class Controller {
 
         for(int i = 0; i < donutsList.size(); i ++) {
 
-            currentOrder.getList().add( donutsList.get( i ) );
+            currentOrder.add( donutsList.get( i ) );
 
         }
 
@@ -67,7 +67,7 @@ public class Controller {
 
     public void addCoffeeToOrder(ArrayList<MenuItem> coffeeList) {
         for(int i = 0; i < coffeeList.size(); i ++) {
-            currentOrder.getList().add(coffeeList.get(i));
+            currentOrder.add(coffeeList.get(i));
         }
 
         currentOrder.orderPrice();
@@ -130,19 +130,16 @@ public class Controller {
         //System.out.println("Current order.");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Order.fxml"));
-            Parent root = (Parent)(fxmlLoader.load());
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-
-            stage.setTitle("Current Order");
-            stage.show();
-
-            setOrderController(fxmlLoader.getController());
-            orderController.setCurrentOrder(currentOrder);
+            Parent root1 = (Parent)(fxmlLoader.load());
 
             OrderController orderController = fxmlLoader.getController();
             orderController.setMainController(this);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+
+            stage.setTitle("Current Order");
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -52,6 +52,22 @@ public class Coffee extends MenuItem implements Customizable {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Coffee) {
+            Coffee other = (Coffee)(obj);
+            if(this.size == other.size) {
+                for(int i = 0; i < this.addIns.length; i ++) {
+                    if(this.addIns[i] != other.addIns[i]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Setter method for the size.
      * @param size the size of the coffee order.
@@ -60,6 +76,7 @@ public class Coffee extends MenuItem implements Customizable {
         this.size = size;
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("1 ");
@@ -94,11 +111,12 @@ public class Coffee extends MenuItem implements Customizable {
             }
             else {
                 builder.append(addInList.get(i));
-                builder.append(", ");
+                builder.append(",");
             }
         }
 
         builder.append("] ");
+        builder.append("$");
         builder.append(String.format("%.2f", super.getPrice()));
 
         return builder.toString(); //1 Short Coffee [syrup,caramel] <price.00>

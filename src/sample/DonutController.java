@@ -85,7 +85,7 @@ public class DonutController {
         typesCB.getSelectionModel().select("Yeast Donut");
 
         flavorLV.getItems().add( "Glazed" );
-        flavorLV.getItems().add( "Choclate Frosted" );
+        flavorLV.getItems().add( "Chocolate Frosted" );
         flavorLV.getItems().add( "Strawberry Frosted" );
 
         // Quantity Button
@@ -121,7 +121,7 @@ public class DonutController {
             flavorLV.getItems().clear();
 
             flavorLV.getItems().add( "Glazed" );
-            flavorLV.getItems().add( "Choclate Frosted" );
+            flavorLV.getItems().add( "Chocolate Frosted" );
             flavorLV.getItems().add( "Strawberry Frosted" );
 
             basePrice = YEAST_PRICE;
@@ -135,7 +135,7 @@ public class DonutController {
 
             flavorLV.getItems().add( "Bavarian Kreme" );
 
-            flavorLV.getItems().add( "Choclate Kreme" );
+            flavorLV.getItems().add( "Chocolate Kreme" );
 
             basePrice = CAKE_PRICE;
 
@@ -146,7 +146,7 @@ public class DonutController {
 
             flavorLV.getItems().add( "Jelly" );
 
-            flavorLV.getItems().add( "Double Choclate" );
+            flavorLV.getItems().add( "Double Chocolate" );
 
             flavorLV.getItems().add( "Vanilla Frosted" );
 

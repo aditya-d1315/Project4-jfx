@@ -40,16 +40,37 @@ public class Donut extends MenuItem {
         this.flavor = flavor;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Donut) {
+            Donut other = (Donut)(obj);
+            return (this.type == other.type && this.flavor.equals(other.flavor));
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("1 ");
-        builder.append(flavor);
+        switch(flavor) {
+            case "Glazed" -> builder.append("Glazed");
+            case "Chocolate Frosted" -> builder.append("Chocolate_Frosted");
+            case "Strawberry Frosted" -> builder.append("Strawberry_Frosted");
+            case "Boston Kreme" -> builder.append("Boston_Kreme");
+            case "Bavarian Kreme" -> builder.append("Bavarian_Kreme");
+            case "Chocolate Kreme" -> builder.append("Chocolate_Kreme");
+            case "Jelly" -> builder.append("Jelly");
+            case "Double Chocolate" -> builder.append("Double_Chocolate");
+            case "Vanilla Frosted" -> builder.append("Vanilla_Frosted");
+        }
         builder.append(" ");
         switch(type) {
-            case TYPE_YEAST -> builder.append("yeast_donut ");
-            case TYPE_CAKE -> builder.append("cake_donut ");
-            case TYPE_HOLE -> builder.append("donut_hole ");
+            case TYPE_YEAST -> builder.append("Yeast_Donut ");
+            case TYPE_CAKE -> builder.append("Cake_Donut ");
+            case TYPE_HOLE -> builder.append("Donut_Hole ");
         }
+        builder.append("$");
         builder.append(String.format("%.2f", super.getPrice()));
         return builder.toString(); //1 <flavor> <type> <price.00>
     }
