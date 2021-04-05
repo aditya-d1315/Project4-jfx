@@ -40,6 +40,20 @@ public class Donut extends MenuItem {
         this.flavor = flavor;
     }
 
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("1 ");
+        builder.append(flavor);
+        builder.append(" ");
+        switch(type) {
+            case TYPE_YEAST -> builder.append("yeast_donut ");
+            case TYPE_CAKE -> builder.append("cake_donut ");
+            case TYPE_HOLE -> builder.append("donut_hole ");
+        }
+        builder.append(String.format("%.2f", super.getPrice()));
+        return builder.toString(); //1 <flavor> <type> <price.00>
+    }
+
     /**
      * Method to calculate price of this donut, overridden from the MenuItem superclass.
      */

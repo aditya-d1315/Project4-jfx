@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
@@ -16,6 +17,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
+
+    @FXML
+    private TextArea outputTextArea;
 
     @FXML
     private VBox donut_img_button;
@@ -31,12 +35,20 @@ public class Controller {
 
     private Order currentOrder;
 
+    private OrderController orderController;
+
     private int orderNum;
+
+    public void setOrderController(OrderController orderController) {
+        this.orderController = orderController;
+    }
 
     @FXML
     public void initialize() {
         orderNum = 1;
         currentOrder = new Order(orderNum);
+        outputTextArea.setEditable(false);
+        outputTextArea.appendText("Started.\n");
     }
 
     public void addDonutsToOrder(ArrayList<MenuItem> donutsList) {
@@ -49,6 +61,18 @@ public class Controller {
 
         currentOrder.orderPrice();
 
+        outputTextArea.appendText("Donuts have been added to order.\n");
+
+    }
+
+    public void addCoffeeToOrder(ArrayList<MenuItem> coffeeList) {
+        for(int i = 0; i < coffeeList.size(); i ++) {
+            currentOrder.getList().add(coffeeList.get(i));
+        }
+
+        currentOrder.orderPrice();
+
+        outputTextArea.appendText("Coffee has been added to the order.\n");
     }
 
     @FXML
@@ -104,10 +128,32 @@ public class Controller {
     @FXML
     void showCurrentOrder(MouseEvent event) {
         //System.out.println("Current order.");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Order.fxml"));
+            Parent root = (Parent)(fxmlLoader.load());
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+
+            stage.setTitle("Current Order");
+            stage.show();
+
+            setOrderController(fxmlLoader.getController());
+            orderController.setCurrentOrder(currentOrder);
+
+            OrderController orderController = fxmlLoader.getController();
+            orderController.setMainController(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void showStoreOrderHistory(MouseEvent event) {
         //System.out.println("Order history.");
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
     }
 }

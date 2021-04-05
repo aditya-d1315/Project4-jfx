@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -239,6 +240,9 @@ public class DonutController {
         }
 
         mainController.addDonutsToOrder(donutsList);
+
+        Stage stage = (Stage) addOrderButton.getScene().getWindow();
+        stage.close();
     }
 
 }

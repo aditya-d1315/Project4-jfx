@@ -67,7 +67,7 @@ public class Order implements Customizable {
 
     public void orderPrice() {
 
-
+        this.totalPrice = 0;
         for ( int i = 0; i < list.size(); i++ ) {
 
             this.totalPrice += list.get( i ).getPrice();

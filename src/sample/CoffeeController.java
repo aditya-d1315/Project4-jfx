@@ -6,6 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class CoffeeController {
 
@@ -88,7 +91,16 @@ public class CoffeeController {
 
     @FXML
     void addToOrder(ActionEvent event) {
+        coffee.itemPrice();
+        ArrayList<MenuItem> coffeeList = new ArrayList<MenuItem>();
+        for(int i = 1; i <= Integer.parseInt(quantityCB.getValue()); i ++) {
+            coffeeList.add(coffee);
+        }
 
+        mainController.addCoffeeToOrder(coffeeList);
+
+        Stage stage = (Stage)(orderButton.getScene().getWindow());
+        stage.close();
     }
 
     @FXML
@@ -201,7 +213,37 @@ public class CoffeeController {
 
     @FXML
     void updateSize(ActionEvent event) {
+        double sizeCost = 0;
+        String sizeCoffee = sizeCB.getValue();
 
+        switch(sizeCoffee) {
+            case "Short":
+                sizeCost = Coffee.SHORT_PRICE;
+                coffee.setSize(Coffee.SIZE_SHORT);
+                break;
+            case "Tall":
+                sizeCost = Coffee.TALL_PRICE;
+                coffee.setSize(Coffee.SIZE_TALL);
+                break;
+            case "Grande":
+                sizeCost = Coffee.GRANDE_PRICE;
+                coffee.setSize(Coffee.SIZE_GRANDE);
+                break;
+            case "Venti":
+                sizeCost = Coffee.VENTI_PRICE;
+                coffee.setSize(Coffee.SIZE_VENTI);
+                break;
+        }
+
+        double addInCost = 0;
+        for(int i = 0; i < Coffee.NUM_ADD_INS; i ++) {
+            if(coffee.getAddIns()[i]) {
+                addInCost += Coffee.ADDIN_PRICE;
+            }
+        }
+
+        subTotal = numCoffee * (sizeCost + addInCost);
+        subTotalField.setText(String.format("%.2f", subTotal));
     }
 
 }

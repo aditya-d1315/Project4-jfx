@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.ArrayList;
+
 /**
  * Subclass to hold information on a Coffee item.
  * @author Prasanth Balaji, Aditya Dhawan
@@ -51,6 +53,58 @@ public class Coffee extends MenuItem implements Customizable {
     }
 
     /**
+     * Setter method for the size.
+     * @param size the size of the coffee order.
+     */
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("1 ");
+        switch(size) {
+            case SIZE_SHORT -> builder.append("Short Coffee ");
+            case SIZE_TALL -> builder.append("Tall Coffee ");
+            case SIZE_GRANDE -> builder.append("Grande Coffee ");
+            case SIZE_VENTI -> builder.append("Venti Coffee ");
+        }
+        builder.append("[");
+
+        ArrayList<String> addInList = new ArrayList<String>();
+        if(addIns[CREAM]) {
+            addInList.add("cream");
+        }
+        if(addIns[SYRUP]) {
+            addInList.add("syrup");
+        }
+        if(addIns[MILK]) {
+            addInList.add("milk");
+        }
+        if(addIns[CARAMEL]) {
+            addInList.add("caramel");
+        }
+        if(addIns[WHIPPED_CREAM]) {
+            addInList.add("whipped_cream");
+        }
+
+        for(int i = 0; i < addInList.size(); i ++) {
+            if(i == addInList.size() - 1) {
+                builder.append(addInList.get(i));
+            }
+            else {
+                builder.append(addInList.get(i));
+                builder.append(", ");
+            }
+        }
+
+        builder.append("] ");
+        builder.append(String.format("%.2f", super.getPrice()));
+
+        return builder.toString(); //1 Short Coffee [syrup,caramel] <price.00>
+    }
+
+    /**
      * Method to calculate the price of this Coffee, overridden from the parent class MenuItem. This will depend on both the size and add-ins in the coffee.
      */
     @Override
@@ -73,8 +127,6 @@ public class Coffee extends MenuItem implements Customizable {
             case SIZE_GRANDE -> super.setPrice(super.getPrice() + GRANDE_PRICE);
             case SIZE_VENTI -> super.setPrice(super.getPrice() + VENTI_PRICE);
         }
-
-
 
     }
 
