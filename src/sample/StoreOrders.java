@@ -3,16 +3,22 @@ package sample;
 import java.util.ArrayList;
 
 /**
- * A class that keeps the list of orders placed by the user
+ * Class defining the ADT StoreOrders, which contains the list of Orders made by the user and has functionality to
+ * add and remove Orders.
+ * @author Prasanth Balaji, Aditya Dhawan
  */
 
 public class StoreOrders implements Customizable {
 
     /**
-     * A record of orders for a specific user
+     * A list of Orders for a specific user.
      */
 
     ArrayList< Order > listOrders;
+
+    /**
+     * Default constructor to create a new StoreOrder object.
+     */
 
     public StoreOrders()
     {
@@ -20,6 +26,12 @@ public class StoreOrders implements Customizable {
         listOrders = new ArrayList<>();
 
     }
+
+    /**
+     * Method to add an Order to the list of Orders for a specific user.
+     * @param obj The object to add.
+     * @return -> true if the object is an instance of Order, false otherwise.
+     */
 
     @Override
     public boolean add(Object obj) {
@@ -30,6 +42,12 @@ public class StoreOrders implements Customizable {
             return false;
 
     }
+
+    /**
+     * Method to remove an Order from the list of Order for a specific user.
+     * @param obj The object to remove.
+     * @return -> true if the object is an instance of Order, false otherwise.
+     */
 
     @Override
     public boolean remove(Object obj) {
@@ -57,6 +75,11 @@ public class StoreOrders implements Customizable {
             return false;
 
     }
+
+    /**
+     * Getter method to retrieve the list of Orders for a specific user.
+     * @return -> The list of Orders for a specific user.
+     */
 
     public ArrayList<Order> getListOrders() {
         return listOrders;

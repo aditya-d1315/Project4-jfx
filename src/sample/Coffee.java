@@ -28,13 +28,13 @@ public class Coffee extends MenuItem implements Customizable {
     public static final int SIZE_SHORT = 0, SIZE_TALL = 1, SIZE_GRANDE = 2, SIZE_VENTI = 3, NUM_ADD_INS = 5;
 
     /**
-     * Constants relating to the indices of the addIns array
+     * Constants relating to the indices of the addIns array.
      */
 
     public static final int CREAM = 0, SYRUP = 1, MILK = 2, CARAMEL = 3, WHIPPED_CREAM = 4;
 
     /**
-     * Constants relating to the price for each specific size of coffee
+     * Constants relating to the price for each specific size of coffee.
      */
 
     public static final double SHORT_PRICE = 1.99, TALL_PRICE = 2.49, GRANDE_PRICE = 2.99, VENTI_PRICE = 3.49, ADDIN_PRICE = 0.20;
@@ -51,6 +51,12 @@ public class Coffee extends MenuItem implements Customizable {
             addIns[i] = false;
         }
     }
+
+    /**
+     * Overriding the equals() method for the Coffee object, defining equality based on their size and their addIns.
+     * @param obj -> The other Coffee object, sent in as a generic Object.
+     * @return -> true if the two objects are equal, false otherwise.
+     */
 
     @Override
     public boolean equals(Object obj) {
@@ -80,6 +86,11 @@ public class Coffee extends MenuItem implements Customizable {
     public void setSize(int size) {
         this.size = size;
     }
+
+    /**
+     * Overriding the toString() method for the Coffee object.
+     * @return -> String in the format of < Quantity > < Size > < AddIns > < Price >.
+     */
 
     @Override
     public String toString() {

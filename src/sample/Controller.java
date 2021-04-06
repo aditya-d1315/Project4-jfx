@@ -17,9 +17,22 @@ import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Main controller defining the functionality of the first window's GUI and storing vital information used for the entire program.
+ * @author Prasanth Balaji, Aditya Dhawan
+ */
+
 public class Controller {
 
+    /**
+     * Constant used to set the order number of the first order
+     */
+
     public static final int FIRST_ORDER = 1;
+
+    /**
+     * Widget 
+     */
 
     @FXML
     private TextArea outputTextArea;

@@ -40,6 +40,12 @@ public class Donut extends MenuItem {
         this.flavor = flavor;
     }
 
+    /**
+     * Overriding the equals() method for the Donut object, defining equality based on their type and flavor.
+     * @param obj -> The other Donut object, sent in as a generic Object.
+     * @return -> true if the two objects are equal, false otherwise.
+     */
+
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Donut) {
@@ -48,6 +54,11 @@ public class Donut extends MenuItem {
         }
         return false;
     }
+
+    /**
+     * Overriding the toString() method for the Donut object.
+     * @return -> String in the format of < Quantity > < Flavor > < Type > < Price >.
+     */
 
     @Override
     public String toString() {
