@@ -34,8 +34,25 @@ public class StoreOrders implements Customizable {
     @Override
     public boolean remove(Object obj) {
 
-        if ( obj instanceof Order )
-            return listOrders.remove( ( Order ) obj );
+        if ( obj instanceof Order ) {
+
+            Order object = ( Order ) obj;
+
+            for ( int i = 0; i < listOrders.size(); i++ ) {
+
+                if ( listOrders.get( i ).getNumber() == object.getNumber() ) {
+
+                    listOrders.remove( object );
+
+                    return true;
+
+                }
+
+
+            }
+
+            return false;
+        }
         else
             return false;
 

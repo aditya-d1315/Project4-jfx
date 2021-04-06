@@ -93,4 +93,18 @@ public class Order implements Customizable {
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if ( obj instanceof Order ) {
+
+            Order object = ( Order ) obj;
+
+            return this.number == object.getNumber();
+        }
+
+        return false;
+
+    }
 }

@@ -212,6 +212,18 @@ public class DonutController {
     @FXML
     void addToOrder(ActionEvent event) {
         ArrayList<MenuItem> donutsList = new ArrayList<MenuItem>();
+
+        // Checking if no order was made
+
+        if ( order.getItems().size() == 0 ) {
+
+            Alert a = new Alert(AlertType.ERROR);
+            a.setContentText("No selections were made");
+            a.show();
+            return;
+
+        }
+
         for(int i = 0; i < order.getItems().size(); i ++) {
             String[] itemArr = order.getItems().get(i).split(",");
             int numDonuts = (int)(Double.parseDouble(itemArr[QUANTITY_INDEX]));

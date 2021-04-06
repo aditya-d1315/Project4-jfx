@@ -58,6 +58,11 @@
       <VBox alignment="CENTER" prefHeight="247.0" prefWidth="126.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="exportButton" mnemonicParsing="false" onAction="#exportToFile" text="Export to File" />
+            <Button fx:id="returnButton" mnemonicParsing="false" onAction="#returnToMain" text="Return to Main">
+               <VBox.margin>
+                  <Insets top="25.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </right>

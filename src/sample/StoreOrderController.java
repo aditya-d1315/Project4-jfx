@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.*;
 import java.util.ArrayList;
 
 public class StoreOrderController {
@@ -30,9 +33,16 @@ public class StoreOrderController {
     @FXML
     private Button exportButton;
 
+    @FXML
+    private Button returnButton;
+
     private Controller mainController;
 
     private StoreOrders storeOrders;
+
+
+
+
 
     public void setMainController(Controller mainController) {
         this.mainController = mainController;
@@ -89,11 +99,88 @@ public class StoreOrderController {
         }
         else {
 
+            // Remove selected item from storeOrder
+
+            String[] orderArr = selectedOrder.split("\t");
+            String[] orderNumArr = orderArr[INDEX_ORDER_NAME].split("#");
+            int orderNumber = Integer.parseInt(orderNumArr[INDEX_ORDER_NUMBER]);
+
+            storeOrders.remove( new Order( orderNumber ) );
+
+            ordersLV.getItems().remove( ordersLV.getSelectionModel().getSelectedItem() );
+
+            menuItemLV.getItems().clear();
+
+            outputTextArea.appendText( "Order# " + orderNumber + " has been successfully removed.\n" );
+
         }
     }
 
     @FXML
     void exportToFile(ActionEvent event) {
 
+        OutputStream os;
+
+
+
+        try {
+
+            os = new FileOutputStream( new File( "receipt.txt") );
+
+            for ( int i = 0; i < storeOrders.listOrders.size(); i++ ) {
+
+                //System.out.println( "Order Number: " + storeOrders.listOrders.get( i ).getNumber() );
+                //System.out.println( "\n\n\n" );
+
+                try {
+
+                    os.write( ( storeOrders.getListOrders().get( i ).toString() ).getBytes() );
+
+                    os.write( ( "\n").getBytes() );
+
+                    for ( int j = 0; j < storeOrders.listOrders.get( i ).getList().size(); j++ ) {
+
+
+
+                        os.write( ( "\t" + storeOrders.getListOrders().get( i ).getList().get( j ) ).getBytes() );
+
+
+                        os.write( ( "\n" ).getBytes() );
+
+
+                    }
+
+                    os.write( ( "\n\n\n").getBytes() );
+
+                } catch ( IOException e ) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            try {
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        outputTextArea.appendText( "Exported successfully.\n" );
+
+
+
     }
+
+    @FXML
+    void returnToMain( ActionEvent event ) {
+
+        Stage stage = (Stage) returnButton.getScene().getWindow();
+        stage.close();
+
+    }
+
+
 }

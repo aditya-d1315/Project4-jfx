@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -144,6 +145,14 @@ public class Controller {
     @FXML
     void showCurrentOrder(MouseEvent event) {
         //System.out.println("Current order.");
+
+        if ( currentOrder.getList().size() == 0 ) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Order is currently empty");
+            a.show();
+            return;
+        }
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Order.fxml"));
             Parent root1 = (Parent)(fxmlLoader.load());
