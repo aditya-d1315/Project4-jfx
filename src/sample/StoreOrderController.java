@@ -2,6 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -53,9 +54,9 @@ public class StoreOrderController {
 
     @FXML
     void displayOrderInfo(MouseEvent event) {
-        String strOrder = ordersLV.getSelectionModel().getSelectedItem();
-        if(strOrder != null) {
-            String[] orderArr = strOrder.split("\t");
+        String selectedOrder = ordersLV.getSelectionModel().getSelectedItem();
+        if(selectedOrder != null) {
+            String[] orderArr = selectedOrder.split("\t");
             String[] orderNumArr = orderArr[INDEX_ORDER_NAME].split("#");
             int orderNumber = Integer.parseInt(orderNumArr[INDEX_ORDER_NUMBER]);
 
@@ -79,7 +80,16 @@ public class StoreOrderController {
 
     @FXML
     void removeOrder(ActionEvent event) {
+        String selectedOrder = ordersLV.getSelectionModel().getSelectedItem();
+        if(selectedOrder == null) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("No order selected.");
+            a.show();
+            return;
+        }
+        else {
 
+        }
     }
 
     @FXML
