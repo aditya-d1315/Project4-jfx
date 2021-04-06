@@ -82,11 +82,7 @@ public class Controller {
 
     // Need to check this!
 
-    public void finalizePlaceOrder(Order currentOrder) {
-        //Add finalized order to StoreOrders
-        this.currentOrder = currentOrder;
-        storeOrders.add(currentOrder);
-
+    public void finalizePlaceOrder() {
         //Initialize new order
         orderNum ++;
         currentOrder = new Order( orderNum );

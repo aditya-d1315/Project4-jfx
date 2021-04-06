@@ -87,7 +87,7 @@ public class OrderController {
 
         mainController.getStoreOrders().add( mainController.getCurrentOrder() );
 
-        mainController.finalizePlaceOrder(currentOrder);
+        mainController.finalizePlaceOrder();
 
         Stage stage = (Stage) placeOrderButton.getScene().getWindow();
         stage.close();
