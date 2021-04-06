@@ -35,9 +35,11 @@ public class Controller {
 
     private Order currentOrder;
 
+    private StoreOrders storeOrders;
+
     private OrderController orderController;
 
-    private int orderNum;
+    private int orderNum = 1;
 
     public void setOrderController(OrderController orderController) {
         this.orderController = orderController;
@@ -47,6 +49,7 @@ public class Controller {
     public void initialize() {
         orderNum = 1;
         currentOrder = new Order(orderNum);
+        storeOrders = new StoreOrders();
         outputTextArea.setEditable(false);
         outputTextArea.appendText("Started.\n");
     }
@@ -74,6 +77,19 @@ public class Controller {
 
         outputTextArea.appendText("Coffee has been added to the order.\n");
     }
+
+    // Need to check this!
+
+    public void finalizePlaceOrder() {
+
+        orderNum++;
+
+        currentOrder = new Order( orderNum );
+
+        outputTextArea.appendText( "Order has been placed. \n" );
+    }
+
+
 
     @FXML
     void selectCoffee(MouseEvent event) {
@@ -148,9 +164,42 @@ public class Controller {
     @FXML
     void showStoreOrderHistory(MouseEvent event) {
         //System.out.println("Order history.");
+
+        System.out.println( "\n\n\n" );
+
+        for ( int i = 0; i < storeOrders.listOrders.size(); i++ ) {
+
+            System.out.println( "Order Number: " + storeOrders.listOrders.get( i ).getNumber() );
+            System.out.println( "\n\n\n" );
+
+            for ( int j = 0; j < storeOrders.listOrders.get( i ).getList().size(); j++ ) {
+
+                if ( storeOrders.listOrders.get( i ).getList().get( j ) instanceof Coffee ) {
+
+                    Coffee coffee = ( Coffee ) storeOrders.listOrders.get( i ).getList().get( j );
+
+                    System.out.println( "\t" + coffee );
+                }
+
+                if (storeOrders.listOrders.get( i ).getList().get( j ) instanceof Donut ) {
+
+                    Donut donut = ( Donut ) storeOrders.listOrders.get( i ).getList().get( j );
+
+                    System.out.println( "\t" + donut );
+
+                }
+
+                System.out.println( "\n\n\n" );
+
+            }
+        }
+
+
     }
 
     public Order getCurrentOrder() {
         return currentOrder;
     }
+
+    public StoreOrders getStoreOrders() { return storeOrders; }
 }

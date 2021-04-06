@@ -76,6 +76,8 @@ public class Order implements Customizable {
 
     }
 
+    public int getNumber() { return number; }
+
     public double getTotalPrice() {
         return totalPrice;
     }

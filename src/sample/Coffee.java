@@ -55,7 +55,9 @@ public class Coffee extends MenuItem implements Customizable {
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Coffee) {
+
             Coffee other = (Coffee)(obj);
+
             if(this.size == other.size) {
                 for(int i = 0; i < this.addIns.length; i ++) {
                     if(this.addIns[i] != other.addIns[i]) {
@@ -64,6 +66,9 @@ public class Coffee extends MenuItem implements Customizable {
                 }
                 return true;
             }
+
+            return false;
+
         }
         return false;
     }
