@@ -9,38 +9,78 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
+/**
+ * Controller class for the Current Order GUI.
+ * @author Prasanth Balaji, Aditya Dhawan
+ */
 public class OrderController {
 
+    /**
+     * Constant for the tax of New Jersey.
+     */
     public static final double TAX = 0.0625;
 
+    /**
+     * Constants for indexing String arrays containing information regarding Donut and Coffee objects in their String representation.
+     */
     public static final int INDEX_QTY = 0, INDEX_SIZE = 1, INDEX_FLAVOR = 1, INDEX_TYPE = 2, INDEX_PRICE_DONUT = 3, INDEX_ADDINS = 3, INDEX_PRICE_COFFEE = 4;
 
+    /**
+     * Constants for indexing String arrays containing information regarding Donut and Coffee objects in their String representation.
+     */
     public static final int ITEM_ARR_DONUT = 4, ITEM_ARR_COFFEE = 5;
 
+    /**
+     * Instance field for the ListView containing the specific MenuItems of the current Order.
+     */
     @FXML
     private ListView<String> orderLV;
 
+    /**
+     * Instance field for displaying the subtotal of the current Order.
+     */
     @FXML
     private TextField subtotalField;
 
+    /**
+     * Instance field for displaying the tax on the current Order.
+     */
     @FXML
     private TextField taxField;
 
+    /**
+     * Instance field for displaying the total of the current Order, calculated by adding subtotal and tax together.
+     */
     @FXML
     private TextField totalField;
 
+    /**
+     * Instance field for the button that removes a selected MenuItem from the ListView of MenuItems.
+     */
     @FXML
     private Button removeItemButton;
 
+    /**
+     * Instance field for the button that confirms the Order and places it, and closes the Curernt Order GUI.
+     */
     @FXML
     private Button placeOrderButton;
 
+    /**
+     * Instance field for the main Controller class, meant to link both the main and this controller together to share information.
+     */
     private Controller mainController;
 
+    /**
+     * Instance field for the current Order object, obtained from the main Controller class.
+     */
     private Order currentOrder;
 
+    /**
+     * Setter method that links this OrderController to the main Controller class, and obtains the current Order object field from the main Controller class.
+     * @param mainController - the main Controller class.
+     */
     public void setMainController(Controller mainController) {
         this.mainController = mainController;
         this.currentOrder = mainController.getCurrentOrder();
@@ -48,6 +88,10 @@ public class OrderController {
         initializeOrderListView(orderList);
     }
 
+    /**
+     * Initialization method for the ListView containing all the MenuItems of the current Order.
+     * @param orderList - the list of MenuItems in the current Order.
+     */
     public void initializeOrderListView(ArrayList<MenuItem> orderList) {
         for(int i = 0; i < orderList.size(); i ++) {
             orderLV.getItems().add(orderList.get(i).toString());
@@ -55,6 +99,10 @@ public class OrderController {
         setTotals(orderList);
     }
 
+    /**
+     * Setter method for the subtotal, tax, and total TextFields of the GUI. These TextFields are set based on the subtotal of the Order, the tax on the Order, and subtotal + tax.
+     * @param orderList - the list of MenuItems in the current Order.
+     */
     public void setTotals(ArrayList<MenuItem> orderList) {
         //Calculate Subtotal
 
@@ -77,6 +125,9 @@ public class OrderController {
         currentOrder.setTotalPrice(total);
     }
 
+    /**
+     * Initialization method for the GUI as a whole. Sets specific attributes so that they cannot be edited by the user.
+     */
     @FXML
     public void initialize() {
         subtotalField.setEditable(false);
@@ -84,6 +135,10 @@ public class OrderController {
         totalField.setEditable(false);
     }
 
+    /**
+     * Method to confirm and place an Order after the user is finished reviewing it. Calls to the main Controller to reinitialize current Order with a new number, and closes the Current Order GUI.
+     * @param event - Specific event for when the Place Order button is pressed.
+     */
     @FXML
     void placeOrder(ActionEvent event) {
 
@@ -96,6 +151,10 @@ public class OrderController {
 
     }
 
+    /**
+     * Method to remove a selected MenuItem from the ListView of MenuItems. If no MenuItem is selected in the ListView, an alert will show up, prompting the user to first select an item to remove.
+     * @param event - Specific event for when the Remove button is pressed.
+     */
     @FXML
     void removeItem(ActionEvent event) {
         String item = orderLV.getSelectionModel().getSelectedItem();

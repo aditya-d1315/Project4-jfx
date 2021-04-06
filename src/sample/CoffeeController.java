@@ -7,52 +7,104 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
+/**
+ * Controller class for the Coffee GUI.
+ * @author Prasanth Balaji, Aditya Dhawan
+ */
 public class CoffeeController {
 
+    /**
+     * Constants for initialization and the max number of Coffee objects a user can order at a time.
+     */
+    public static final int ONE = 1, MAX_COFFEE = 6;
+
+    /**
+     * Instance field for the CheckBox for the cream add-in.
+     */
     @FXML
     private CheckBox creamBox;
 
+    /**
+     * Instance field for the CheckBox for the milk add-in.
+     */
     @FXML
     private CheckBox milkBox;
 
+    /**
+     * Instance field for the CheckBox for the whipped cream add-in.
+     */
     @FXML
     private CheckBox whipcreamBox;
 
+    /**
+     * Instance field for the CheckBox for the syrup add-in.
+     */
     @FXML
     private CheckBox syrupBox;
 
+    /**
+     * Instance field for the CheckBox for the caramel add-in.
+     */
     @FXML
     private CheckBox caramelBox;
 
+    /**
+     * Instance field for the ComboBox containing options for the size of the Coffee.
+     */
     @FXML
     private ComboBox< String > sizeCB;
 
+    /**
+     * Instance field for the ComboBox containing options for the quantity of Coffee desired.
+     */
     @FXML
     private ComboBox< String > quantityCB;
 
+    /**
+     * Instance field for the TextField that displays the subtotal of the Coffee being added to the Order.
+     */
     @FXML
     private TextField subTotalField;
 
+    /**
+     * Instance field for the button that adds the specified Coffee to the Order.
+     */
     @FXML
     private Button orderButton;
 
+    /**
+     * Instance field for the main Controller class, meant to link both the main and this controller together to share information.
+     */
     private Controller mainController;
 
+    /**
+     * Instance field for the Coffee object that gets modified using the GUI.
+     */
     private Coffee coffee;
 
+    /**
+     * Instance field for the subtotal of the Coffee being ordered.
+     */
     private double subTotal;
 
+    /**
+     * Instance field for the number of Coffee objects being ordered, modified based on the ComboBox for the quantity.
+     */
     private int numCoffee;
 
-    public static final int ONE = 1, MAX_COFFEE = 6;
-
+    /**
+     * Setter method that links this CoffeeController class to the main Controller class.
+     * @param controller - the main Controller class.
+     */
     public void setMainController(Controller controller) {
         this.mainController = controller;
     }
 
+    /**
+     * Initialization method for the GUI as a whole. Sets specific attributes so that they cannot be edited by the user, and initializes instance fields to default values.
+     */
     @FXML
     public void initialize() {
 
@@ -89,6 +141,10 @@ public class CoffeeController {
 
     }
 
+    /**
+     * Method for when the user presses the button to add the specified Coffee to the Order. This will send the specified number of Coffee objects to the main Controller, and close the Coffee GUI.
+     * @param event - Specific event for when the user presses the Add to Order button.
+     */
     @FXML
     void addToOrder(ActionEvent event) {
         coffee.itemPrice();
@@ -103,6 +159,10 @@ public class CoffeeController {
         stage.close();
     }
 
+    /**
+     * Method for when the user toggles the CheckBox for caramel. Based on the status of the CheckBox, this will either add or remove the add-in.
+     * @param event - Specific event for when the user toggles this CheckBox.
+     */
     @FXML
     void caAction(ActionEvent event) {
         //caramel
@@ -120,6 +180,10 @@ public class CoffeeController {
         subTotalField.setText(String.format("%.2f", subTotal));
     }
 
+    /**
+     * Method for when the user toggles the CheckBox for cream. Based on the status of the CheckBox, this will either add or remove the add-in.
+     * @param event - Specific event for when the user toggles this CheckBox.
+     */
     @FXML
     void cbAction(ActionEvent event) {
         //cream
@@ -137,6 +201,10 @@ public class CoffeeController {
         subTotalField.setText(String.format("%.2f", subTotal));
     }
 
+    /**
+     * Method for when the user toggles the CheckBox for milk. Based on the status of the CheckBox, this will either add or remove the add-in.
+     * @param event - Specific event for when the user toggles this CheckBox.
+     */
     @FXML
     void mbAction(ActionEvent event) {
         //milk
@@ -154,6 +222,10 @@ public class CoffeeController {
         subTotalField.setText(String.format("%.2f", subTotal));
     }
 
+    /**
+     * Method for when the user toggles the CheckBox for syrup. Based on the status of the CheckBox, this will either add or remove the add-in.
+     * @param event - Specific event for when the user toggles this CheckBox.
+     */
     @FXML
     void sbAction(ActionEvent event) {
         //syrup
@@ -171,6 +243,10 @@ public class CoffeeController {
         subTotalField.setText(String.format("%.2f", subTotal));
     }
 
+    /**
+     * Method for when the user toggles the CheckBox for whipped cream. Based on the status of the CheckBox, this will either add or remove the add-in.
+     * @param event - Specific event for when the user toggles this CheckBox.
+     */
     @FXML
     void wcbAction(ActionEvent event) {
         //whipped cream
@@ -188,6 +264,10 @@ public class CoffeeController {
         subTotalField.setText(String.format("%.2f", subTotal));
     }
 
+    /**
+     * Method for when the user selects a specific quantity of Coffee to order from the quantity ComboBox. This will apply a multiplier to the current subtotal, and redisplay it.
+     * @param event - Specific event for when the user selects an option from the quantity ComboBox.
+     */
     @FXML
     void updateQuantity(ActionEvent event) {
         numCoffee = Integer.parseInt(quantityCB.getValue());
@@ -211,6 +291,10 @@ public class CoffeeController {
         subTotalField.setText(String.format("%.2f", subTotal));
     }
 
+    /**
+     * Method for when the user selects a specific size for the Coffee from the size ComboBox. This will alter the subtotal based on the prices for different sizes.
+     * @param event - Specific event for when the user selects an option from the size ComboBox.
+     */
     @FXML
     void updateSize(ActionEvent event) {
         double sizeCost = 0;

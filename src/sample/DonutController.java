@@ -1,46 +1,17 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
+/**
+ * Controller class for the Donut GUI.
+ * @author Prasanth Balaji, Aditya Dhawan
+ */
 public class DonutController {
-
-    @FXML
-    private ComboBox< String > typesCB;
-
-    @FXML
-    private ListView< String > flavorLV;
-
-    @FXML
-    private ComboBox< String > quantity;
-
-    @FXML
-    private Button add;
-
-    @FXML
-    private Button remove;
-
-    @FXML
-    private ListView<String> order;
-
-    @FXML
-    private TextField totalTextField;
-
-    @FXML
-    private Button addOrderButton;
-
-    private Controller mainController;
-
-    private double subTotal, basePrice, numDonuts;
 
     /**
      * Constants for donut type.
@@ -67,10 +38,75 @@ public class DonutController {
      */
     public static final double YEAST_PRICE = 1.39, CAKE_PRICE = 1.59, HOLE_PRICE = 0.33;
 
+    /**
+     * Instance field for the ComboBox containing options for the types of Donuts.
+     */
+    @FXML
+    private ComboBox< String > typesCB;
+
+    /**
+     * Instance field for the ListView that displays the different flavors offered for different types of Donuts.
+     */
+    @FXML
+    private ListView< String > flavorLV;
+
+    /**
+     * Instance field for the ComboBox containing options for the quantity of Donuts, with 12 being the maximum.
+     */
+    @FXML
+    private ComboBox< String > quantity;
+
+    /**
+     * Instance field for the button that queues the specified Donuts for adding to the current Order.
+     */
+    @FXML
+    private Button add;
+
+    /**
+     * Instance feild for the button that removes a selected Donut item from the queue, so that it isn't added when the user adds them to the current Order.
+     */
+    @FXML
+    private Button remove;
+
+    /**
+     * Instance field for the ListView containing the Donuts that the user wishes to add to the current Order.
+     */
+    @FXML
+    private ListView<String> order;
+
+    /**
+     * Instance field for the TextField that displays the subtotal for the Donuts that the user adds to the queue.
+     */
+    @FXML
+    private TextField totalTextField;
+
+    /**
+     * Instance field for the button for adding the specified Donuts to the current Order.
+     */
+    @FXML
+    private Button addOrderButton;
+
+    /**
+     * Instance field for the main Controller class, meant to link both the main and this controller together to share information.
+     */
+    private Controller mainController;
+
+    /**
+     * Instance fields for the subtotal of the Donuts, the base price of a specified type of Donut, and the number of Donuts specified.
+     */
+    private double subTotal, basePrice, numDonuts;
+
+    /**
+     * Setter method that links this DonutController class to the main Controller class.
+     * @param controller - the main Controller class.
+     */
     public void setMainController(Controller controller) {
         this.mainController = controller;
     }
 
+    /**
+     * Initialization method for the GUI as a whole. Sets specific attributes so that they cannot be edited by the user, and initializes instance fields to default values.
+     */
     @FXML
     public void initialize() {
 
@@ -112,6 +148,10 @@ public class DonutController {
 
     }
 
+    /**
+     * Method that updates the subtotal and flavor choices based on the Donut type that the user specifies in the ComboBox for Donut type.
+     * @param event - Specific event for when the user selects an option in the ComboBox for Donut type.
+     */
     @FXML
     void update(ActionEvent event) {
 
@@ -155,11 +195,19 @@ public class DonutController {
         }
     }
 
+    /**
+     * Method that updates the subtotal based on the new quantity of Donuts that the user selects in the quantity ComboBox.
+     * @param event - Specific event for when the user selects an option in the quantity ComboBox.
+     */
     @FXML
     void updateCost(ActionEvent event) {
         numDonuts = Double.parseDouble( quantity.getValue() );
     }
 
+    /**
+     * Method that adds a specific Donut with a quantity, type, and flavor to the queue, so that it can be added to the current Order later, or removed from the queue later.
+     * @param event - Specific event for when the user presses the Add button.
+     */
     @FXML
     void addToListView(ActionEvent event) {
         if(flavorLV.getSelectionModel().getSelectedItem() == null) {
@@ -179,6 +227,10 @@ public class DonutController {
         }
     }
 
+    /**
+     * Method for when the user wishes to remove what they added previously from the queue, so that it doesn't get included in the current Order later on.
+     * @param event - Specific event for when the user presses the Remove button.
+     */
     @FXML
     void removeFromListView(ActionEvent event) {
         String item = order.getSelectionModel().getSelectedItem();
@@ -209,6 +261,10 @@ public class DonutController {
         }
     }
 
+    /**
+     * Method for when the user confirms whatever Donut items they want. This will send a list of Donuts to the main Controller to add to the current Order, and closes the Donut GUI. If no items are added to the queue, an alert will show, prompting the user to make selections before adding to the Order.
+     * @param event - Specific event for when the user presses the Add to Order button.
+     */
     @FXML
     void addToOrder(ActionEvent event) {
         ArrayList<MenuItem> donutsList = new ArrayList<MenuItem>();

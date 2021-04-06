@@ -12,44 +12,76 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Controller class for the StoreOrder GUI.
+ * @author Prasanth Balaji, Aditya Dhawan
+ */
 public class StoreOrderController {
 
-    public static final int INIT = -1;
-
+    /**
+     * Constants for indexing the String arrays used to read in an Order's name and number.
+     */
     public static final int INDEX_ORDER_NAME = 0, INDEX_ORDER_NUMBER = 1;
 
+    /**
+     * Instance field for the ListView containing the different Orders as items.
+     */
     @FXML
     private ListView<String> ordersLV;
 
+    /**
+     * Instance field for the button used to remove items from the ListView containing Orders.
+     */
     @FXML
     private Button removeButton;
 
+    /**
+     * Instance field for the ListView containing the MenuItems for a specified Order.
+     */
     @FXML
     private ListView<String> menuItemLV;
 
+    /**
+     * Instance field for the TextArea at the bottom of the screen, meant to display results of certain actions.
+     */
     @FXML
     private TextArea outputTextArea;
 
+    /**
+     * Instance field for the button used to export all the information of all the Orders to a text file.
+     */
     @FXML
     private Button exportButton;
 
+    /**
+     * Instance field for the button used to close the StoreOrder GUI and return to the Main Menu GUI.
+     */
     @FXML
     private Button returnButton;
 
+    /**
+     * Instance field for the main Controller class, meant to link both the main and this controller together to share information.
+     */
     private Controller mainController;
 
+    /**
+     * Instance field for the StoreOrders object, obtained from the main Controller class.
+     */
     private StoreOrders storeOrders;
 
-
-
-
-
+    /**
+     * Setter method that links this StoreOrderController class to the main Controller class, and obtains the storeOrders field from the main Controller class.
+     * @param mainController - the main Controller class.
+     */
     public void setMainController(Controller mainController) {
         this.mainController = mainController;
         this.storeOrders = mainController.getStoreOrders();
         initializeOrderListView();
     }
 
+    /**
+     * Initialization method for the ListView, populating it with the different Orders that the user has placed.
+     */
     public void initializeOrderListView() {
         ArrayList<Order> orderList = storeOrders.getListOrders();
         for(Order order : orderList) {
@@ -57,11 +89,18 @@ public class StoreOrderController {
         }
     }
 
+    /**
+     * Initialize method for the GUI as a whole. Sets specific attributes so that they cannot be edited by the user.
+     */
     @FXML
     public void initialize() {
         outputTextArea.setEditable(false);
     }
 
+    /**
+     * Method to display the specific items in a specific order on the ListView of MenuItems. Display happens when the user clicks on an item in the ListView of Orders.
+     * @param event - Specific event for when the user clicks on the ListView of Orders.
+     */
     @FXML
     void displayOrderInfo(MouseEvent event) {
         String selectedOrder = ordersLV.getSelectionModel().getSelectedItem();
@@ -88,6 +127,10 @@ public class StoreOrderController {
         }
     }
 
+    /**
+     * Method to remove a selected Order in the ListView of orders. If an item isn't selected when the user hits the button, GUI displays an Alert, telling the user to select an Order on the ListView first.
+     * @param event - Specific event for when the user presses the Remove buton.
+     */
     @FXML
     void removeOrder(ActionEvent event) {
         String selectedOrder = ordersLV.getSelectionModel().getSelectedItem();
@@ -116,6 +159,10 @@ public class StoreOrderController {
         }
     }
 
+    /**
+     * Method to export the contents of all Orders to a text file.
+     * @param event - Specific event for when the user presses the Export to File button.
+     */
     @FXML
     void exportToFile(ActionEvent event) {
 
@@ -174,6 +221,10 @@ public class StoreOrderController {
 
     }
 
+    /**
+     * Method for when the user wishes to exit the StoreOrder GUI and return to the Main Menu GUI. Closes this window.
+     * @param event - Specific event for when the user presses the Return to Main button.
+     */
     @FXML
     void returnToMain( ActionEvent event ) {
 
