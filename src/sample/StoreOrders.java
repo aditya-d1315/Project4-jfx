@@ -40,4 +40,8 @@ public class StoreOrders implements Customizable {
             return false;
 
     }
+
+    public ArrayList<Order> getListOrders() {
+        return listOrders;
+    }
 }

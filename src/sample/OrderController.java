@@ -58,11 +58,12 @@ public class OrderController {
     public void setTotals(ArrayList<MenuItem> orderList) {
         //Calculate Subtotal
 
-        double subTotal = 0;
+        double subTotal = currentOrder.orderPrice();
 
+        /*
         for(int i = 0; i < orderList.size(); i ++) {
             subTotal += orderList.get(i).getPrice();
-        }
+        }*/
 
         subtotalField.setText(String.format("%.2f", subTotal));
 
@@ -73,6 +74,7 @@ public class OrderController {
         //Calculate Total (Subtotal + Tax)
         double total = subTotal + tax;
         totalField.setText(String.format("%.2f", total));
+        currentOrder.setTotalPrice(total);
     }
 
     @FXML
@@ -130,7 +132,7 @@ public class OrderController {
         }
         else if(itemArr.length == ITEM_ARR_COFFEE) { //coffee
 
-            System.out.println( "Original size: " + currentOrder.getList().size() );
+            //System.out.println( "Original size: " + currentOrder.getList().size() );
 
             String coffeeSize = itemArr[INDEX_SIZE];
             int size = Coffee.SIZE_SHORT;
@@ -145,7 +147,7 @@ public class OrderController {
 
             String[] addInsInfo = coffeeAddIns.split( "," );
 
-            System.out.println( "Add Ins: " + coffeeAddIns );
+            //System.out.println( "Add Ins: " + coffeeAddIns );
 
             Coffee coffeeItem = new Coffee(size);
 
@@ -158,6 +160,8 @@ public class OrderController {
                     case "syrup" -> coffeeItem.add( "syrup" );
 
                     case "milk" -> coffeeItem.add( "milk" );
+
+                    case "caramel" -> coffeeItem.add("caramel");
 
                     case "whipped_cream" -> coffeeItem.add( "whipped cream" );
 

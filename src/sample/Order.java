@@ -38,6 +38,12 @@ public class Order implements Customizable {
     }
 
     @Override
+    public String toString() {
+        //Order #1  <price.00>
+        return "Order #" + number + "\t$" + String.format("%.2f", totalPrice);
+    }
+
+    @Override
     public boolean add(Object obj) {
 
         if ( obj instanceof Coffee )
@@ -65,7 +71,7 @@ public class Order implements Customizable {
         return list;
     }
 
-    public void orderPrice() {
+    public double orderPrice() {
 
         this.totalPrice = 0;
         for ( int i = 0; i < list.size(); i++ ) {
@@ -74,6 +80,12 @@ public class Order implements Customizable {
 
         }
 
+        return this.totalPrice;
+
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public int getNumber() { return number; }

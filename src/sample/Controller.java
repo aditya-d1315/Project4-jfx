@@ -165,6 +165,24 @@ public class Controller {
     void showStoreOrderHistory(MouseEvent event) {
         //System.out.println("Order history.");
 
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StoreOrders.fxml"));
+            Parent root1 = (Parent)(fxmlLoader.load());
+
+            StoreOrderController storeOrderController = fxmlLoader.getController();
+            storeOrderController.setMainController(this);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+
+            stage.setTitle("Current Order");
+            stage.show();
+        } catch (IOException e) {
+
+        }
+
+
+        /*
         System.out.println( "\n\n\n" );
 
         for ( int i = 0; i < storeOrders.listOrders.size(); i++ ) {
@@ -192,7 +210,7 @@ public class Controller {
                 System.out.println( "\n\n\n" );
 
             }
-        }
+        }*/
 
 
     }
