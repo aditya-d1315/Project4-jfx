@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class Controller {
 
+    public static final int FIRST_ORDER = 1;
+
     @FXML
     private TextArea outputTextArea;
 
@@ -39,7 +41,7 @@ public class Controller {
 
     private OrderController orderController;
 
-    private int orderNum = 1;
+    private int orderNum;
 
     public void setOrderController(OrderController orderController) {
         this.orderController = orderController;
@@ -47,7 +49,7 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        orderNum = 1;
+        orderNum = FIRST_ORDER;
         currentOrder = new Order(orderNum);
         storeOrders = new StoreOrders();
         outputTextArea.setEditable(false);
@@ -80,12 +82,14 @@ public class Controller {
 
     // Need to check this!
 
-    public void finalizePlaceOrder() {
+    public void finalizePlaceOrder(Order currentOrder) {
+        //Add finalized order to StoreOrders
+        this.currentOrder = currentOrder;
+        storeOrders.add(currentOrder);
 
-        orderNum++;
-
+        //Initialize new order
+        orderNum ++;
         currentOrder = new Order( orderNum );
-
         outputTextArea.appendText( "Order has been placed. \n" );
     }
 
@@ -157,7 +161,7 @@ public class Controller {
             stage.setTitle("Current Order");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
