@@ -18,48 +18,46 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Main controller defining the functionality of the first window's GUI and storing vital information used for the entire program.
+ * Main controller defining the functionality of the main window's GUI and storing vital information used for the entire program.
  * @author Prasanth Balaji, Aditya Dhawan
  */
 
 public class Controller {
 
     /**
-     * Constant used to set the order number of the first order
+     * Constant used to set the order number of the first order.
      */
 
     public static final int FIRST_ORDER = 1;
 
     /**
-     * Widget 
+     * Instance field for the TextArea to perform as a console for the user.
      */
 
     @FXML
     private TextArea outputTextArea;
 
-    @FXML
-    private VBox donut_img_button;
-
-    @FXML
-    private ImageView coffee_img_button;
-
-    @FXML
-    private ImageView order_img_button;
-
-    @FXML
-    private ImageView store_order_img_button;
+    /**
+     * An instance of the current order the user makes.
+     */
 
     private Order currentOrder;
 
+    /**
+     * An instance of the list of orders the user makes using the ADT StoreOrders.
+     */
+
     private StoreOrders storeOrders;
 
-    private OrderController orderController;
+    /**
+     * An attribute to keep track of the order number for each order the user creates.
+     */
 
     private int orderNum;
 
-    public void setOrderController(OrderController orderController) {
-        this.orderController = orderController;
-    }
+    /**
+     * Initialization method for the main's GUI.
+     */
 
     @FXML
     public void initialize() {
@@ -69,6 +67,11 @@ public class Controller {
         outputTextArea.setEditable(false);
         outputTextArea.appendText("Started.\n");
     }
+
+    /**
+     * Method to add the Donut objects chosen by the user to the currentOrder attribute.
+     * @param donutsList -> The list of Donut objects selected by the user.
+     */
 
     public void addDonutsToOrder(ArrayList<MenuItem> donutsList) {
 
@@ -84,6 +87,11 @@ public class Controller {
 
     }
 
+    /**
+     * Method to add the Coffee objects chosen by the user to the currentOrder attribute.
+     * @param coffeeList -> The list of Coffee objects selected by the user.
+     */
+
     public void addCoffeeToOrder(ArrayList<MenuItem> coffeeList) {
         for(int i = 0; i < coffeeList.size(); i ++) {
             currentOrder.add(coffeeList.get(i));
@@ -94,7 +102,10 @@ public class Controller {
         outputTextArea.appendText("Coffee has been added to the order.\n");
     }
 
-    // Need to check this!
+    /**
+     * Reinitializing the currentOrder attribute and incrementing the order number, once an order is placed, to create a new instance
+     * of the current order for the user.
+     */
 
     public void finalizePlaceOrder() {
         //Initialize new order
@@ -104,6 +115,10 @@ public class Controller {
     }
 
 
+    /**
+     * Method to setup the Coffee GUI once the Coffee option is clicked through the main GUI.
+     * @param event
+     */
 
     @FXML
     void selectCoffee(MouseEvent event) {
@@ -131,6 +146,11 @@ public class Controller {
 
     }
 
+    /**
+     * Method to setup the Donut GUI once the Donut option is clicked through the main GUI.
+     * @param event
+     */
+
     @FXML
     void selectDonut(MouseEvent event) {
         //System.out.println("Donut");
@@ -154,6 +174,11 @@ public class Controller {
 
         }
     }
+
+    /**
+     * Method to setup the Current Order GUI once the Current Order option is clicked through the main GUI.
+     * @param event
+     */
 
     @FXML
     void showCurrentOrder(MouseEvent event) {
@@ -183,6 +208,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Method to setup the Show Order GUI once the Show Order option is clicked through the main GUI.
+     * @param event
+     */
+
     @FXML
     void showStoreOrderHistory(MouseEvent event) {
         //System.out.println("Order history.");
@@ -203,43 +233,21 @@ public class Controller {
 
         }
 
-
-        /*
-        System.out.println( "\n\n\n" );
-
-        for ( int i = 0; i < storeOrders.listOrders.size(); i++ ) {
-
-            System.out.println( "Order Number: " + storeOrders.listOrders.get( i ).getNumber() );
-            System.out.println( "\n\n\n" );
-
-            for ( int j = 0; j < storeOrders.listOrders.get( i ).getList().size(); j++ ) {
-
-                if ( storeOrders.listOrders.get( i ).getList().get( j ) instanceof Coffee ) {
-
-                    Coffee coffee = ( Coffee ) storeOrders.listOrders.get( i ).getList().get( j );
-
-                    System.out.println( "\t" + coffee );
-                }
-
-                if (storeOrders.listOrders.get( i ).getList().get( j ) instanceof Donut ) {
-
-                    Donut donut = ( Donut ) storeOrders.listOrders.get( i ).getList().get( j );
-
-                    System.out.println( "\t" + donut );
-
-                }
-
-                System.out.println( "\n\n\n" );
-
-            }
-        }*/
-
-
     }
+
+    /**
+     * Getter method for the current order of the user, represented through the ADT Order.
+     * @return -> The currentOrder attribute.
+     */
 
     public Order getCurrentOrder() {
         return currentOrder;
     }
+
+    /**
+     * Getter method for the list of orders the user has made, represented through the ADT StoreOrders.
+     * @return -> The storeOrders attribute.
+     */
 
     public StoreOrders getStoreOrders() { return storeOrders; }
 }
