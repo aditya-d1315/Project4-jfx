@@ -57,18 +57,6 @@ public class DonutController {
     private ComboBox< String > quantity;
 
     /**
-     * Instance field for the button that queues the specified Donuts for adding to the current Order.
-     */
-    @FXML
-    private Button add;
-
-    /**
-     * Instance feild for the button that removes a selected Donut item from the queue, so that it isn't added when the user adds them to the current Order.
-     */
-    @FXML
-    private Button remove;
-
-    /**
      * Instance field for the ListView containing the Donuts that the user wishes to add to the current Order.
      */
     @FXML

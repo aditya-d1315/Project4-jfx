@@ -34,6 +34,7 @@ public class Donut extends MenuItem {
     /**
      * Constructor for a new Donut object.
      * @param type the type of the donut order.
+     * @param flavor the flavor of the Donut.
      */
     public Donut(int type, String flavor) {
         this.type = type;
@@ -57,7 +58,7 @@ public class Donut extends MenuItem {
 
     /**
      * Overriding the toString() method for the Donut object.
-     * @return -> String in the format of < Quantity > < Flavor > < Type > < Price >.
+     * @return -> String in the format of [ Quantity ] [ Flavor ] [ Type ] [ Price ].
      */
 
     @Override

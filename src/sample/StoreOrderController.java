@@ -30,12 +30,6 @@ public class StoreOrderController {
     private ListView<String> ordersLV;
 
     /**
-     * Instance field for the button used to remove items from the ListView containing Orders.
-     */
-    @FXML
-    private Button removeButton;
-
-    /**
      * Instance field for the ListView containing the MenuItems for a specified Order.
      */
     @FXML
@@ -48,21 +42,10 @@ public class StoreOrderController {
     private TextArea outputTextArea;
 
     /**
-     * Instance field for the button used to export all the information of all the Orders to a text file.
-     */
-    @FXML
-    private Button exportButton;
-
-    /**
      * Instance field for the button used to close the StoreOrder GUI and return to the Main Menu GUI.
      */
     @FXML
     private Button returnButton;
-
-    /**
-     * Instance field for the main Controller class, meant to link both the main and this controller together to share information.
-     */
-    private Controller mainController;
 
     /**
      * Instance field for the StoreOrders object, obtained from the main Controller class.
@@ -74,7 +57,6 @@ public class StoreOrderController {
      * @param mainController - the main Controller class.
      */
     public void setMainController(Controller mainController) {
-        this.mainController = mainController;
         this.storeOrders = mainController.getStoreOrders();
         initializeOrderListView();
     }
@@ -175,9 +157,6 @@ public class StoreOrderController {
             os = new FileOutputStream( new File( "receipt.txt") );
 
             for ( int i = 0; i < storeOrders.listOrders.size(); i++ ) {
-
-                //System.out.println( "Order Number: " + storeOrders.listOrders.get( i ).getNumber() );
-                //System.out.println( "\n\n\n" );
 
                 try {
 

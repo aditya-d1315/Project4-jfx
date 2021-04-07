@@ -44,7 +44,7 @@ public class Order implements Customizable {
 
     /**
      * Overriding the toString() method for the Order object.
-     * @return -> String in the format of "Order # < number >   < price >".
+     * @return -> String in the format of "Order # [ number ]   [ price ]".
      */
 
     @Override

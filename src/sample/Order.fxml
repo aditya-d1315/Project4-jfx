@@ -42,7 +42,7 @@
                               <Insets right="30.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="taxField" prefHeight="25.0" prefWidth="43.0" />
+                        <TextField fx:id="taxField" prefHeight="25.0" prefWidth="54.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

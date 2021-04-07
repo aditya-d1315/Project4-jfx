@@ -5,15 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -117,12 +111,11 @@ public class Controller {
 
     /**
      * Method to setup the Coffee GUI once the Coffee option is clicked through the main GUI.
-     * @param event
+     * @param event - The specific event for when the user selects the Coffee ImageView.
      */
 
     @FXML
     void selectCoffee(MouseEvent event) {
-        //System.out.println("Coffee");
 
         try {
 
@@ -148,12 +141,11 @@ public class Controller {
 
     /**
      * Method to setup the Donut GUI once the Donut option is clicked through the main GUI.
-     * @param event
+     * @param event - The specific event for when the user selects the Donut ImageView.
      */
 
     @FXML
     void selectDonut(MouseEvent event) {
-        //System.out.println("Donut");
 
         try {
 
@@ -177,12 +169,11 @@ public class Controller {
 
     /**
      * Method to setup the Current Order GUI once the Current Order option is clicked through the main GUI.
-     * @param event
+     * @param event - The specific event for when the user selects the Order ImageView.
      */
 
     @FXML
     void showCurrentOrder(MouseEvent event) {
-        //System.out.println("Current order.");
 
         if ( currentOrder.getList().size() == 0 ) {
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -210,12 +201,11 @@ public class Controller {
 
     /**
      * Method to setup the Show Order GUI once the Show Order option is clicked through the main GUI.
-     * @param event
+     * @param event - The specific event for when the user selects the StoreOrders ImageView.
      */
 
     @FXML
     void showStoreOrderHistory(MouseEvent event) {
-        //System.out.println("Order history.");
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StoreOrders.fxml"));

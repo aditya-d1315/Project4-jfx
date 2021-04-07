@@ -16,8 +16,8 @@ public class Main extends Application {
 
     /**
      * Overriding the start() method of Application
-     * @param primaryStage
-     * @throws Exception
+     * @param primaryStage - the main window of the GUI.
+     * @throws Exception - thrown for when the GUI cannot be launched.
      */
 
     @Override
@@ -31,7 +31,7 @@ public class Main extends Application {
 
     /**
      * Main method of the class
-     * @param args
+     * @param args - Used to start the GUI.
      */
 
     public static void main(String[] args) {

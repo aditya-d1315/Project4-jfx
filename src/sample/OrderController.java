@@ -24,7 +24,7 @@ public class OrderController {
     /**
      * Constants for indexing String arrays containing information regarding Donut and Coffee objects in their String representation.
      */
-    public static final int INDEX_QTY = 0, INDEX_SIZE = 1, INDEX_FLAVOR = 1, INDEX_TYPE = 2, INDEX_PRICE_DONUT = 3, INDEX_ADDINS = 3, INDEX_PRICE_COFFEE = 4;
+    public static final int INDEX_SIZE = 1, INDEX_FLAVOR = 1, INDEX_TYPE = 2, INDEX_ADDINS = 3;
 
     /**
      * Constants for indexing String arrays containing information regarding Donut and Coffee objects in their String representation.
@@ -54,12 +54,6 @@ public class OrderController {
      */
     @FXML
     private TextField totalField;
-
-    /**
-     * Instance field for the button that removes a selected MenuItem from the ListView of MenuItems.
-     */
-    @FXML
-    private Button removeItemButton;
 
     /**
      * Instance field for the button that confirms the Order and places it, and closes the Curernt Order GUI.
@@ -190,9 +184,6 @@ public class OrderController {
 
         }
         else if(itemArr.length == ITEM_ARR_COFFEE) { //coffee
-
-            //System.out.println( "Original size: " + currentOrder.getList().size() );
-
             String coffeeSize = itemArr[INDEX_SIZE];
             int size = Coffee.SIZE_SHORT;
             switch(coffeeSize) {
@@ -205,8 +196,6 @@ public class OrderController {
             String coffeeAddIns = itemArr[INDEX_ADDINS].replace("[", "").replace( "]", "" );
 
             String[] addInsInfo = coffeeAddIns.split( "," );
-
-            //System.out.println( "Add Ins: " + coffeeAddIns );
 
             Coffee coffeeItem = new Coffee(size);
 

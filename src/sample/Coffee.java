@@ -89,7 +89,7 @@ public class Coffee extends MenuItem implements Customizable {
 
     /**
      * Overriding the toString() method for the Coffee object.
-     * @return -> String in the format of < Quantity > < Size > < AddIns > < Price >.
+     * @return -> String in the format of [ Quantity ] [ Size ] [ AddIns ] [ Price ].
      */
 
     @Override
@@ -275,7 +275,7 @@ public class Coffee extends MenuItem implements Customizable {
 
     /**
      * Getter method to obtain the list of add-ins of the coffee.
-     * @return
+     * @return the add-ins array.
      */
     public boolean[] getAddIns() {
         return addIns;
